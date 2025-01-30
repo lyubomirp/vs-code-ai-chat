@@ -20,6 +20,8 @@ export function activate(context: vscode.ExtensionContext) {
 			{ enableScripts: true}
 		)
 
+		const history : any[] = []
+
 		vscode.window.showInformationMessage('Loading webview');
 
 		panel.webview.html = 
@@ -88,11 +90,17 @@ export function activate(context: vscode.ExtensionContext) {
 				let response = '';
 
 				try {
+
 					const streamResponse = await ollama.chat({
-						model: 'deepseek-r1:7b',
-						messages: [{ role: 'user', content: userPrompt}],
-						stream: true
+						model: 'llama3.1:8b',
+						messages: [...history, { role: 'user', content: userPrompt}],
+						stream: true,
+						options: {
+							num_ctx: 4096
+						}
 					})
+
+					history.push({ role: 'assistant', content: userPrompt});
 
 					for await (const part of streamResponse) {
 						response += part.message.content;
