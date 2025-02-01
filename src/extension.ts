@@ -10,11 +10,11 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('lyubo-deepseek-test.openDeepchatPanel', () => {
-		const title = 'Deepseek Chat';
+	const disposable = vscode.commands.registerCommand('lyubo-deepseek-test.openAiChatPanel', () => {
+		const title = 'AI Chat';
 
 		const panel = vscode.window.createWebviewPanel(
-			'deepChat',
+			'aiChat',
 			title,
 			vscode.ViewColumn.One,
 			{ enableScripts: true}
@@ -107,7 +107,7 @@ export function activate(context: vscode.ExtensionContext) {
 						panel.webview.postMessage({ command: 'chatResponse', text: response})
 					}
 				} catch (e: any) {
-					panel.webview.postMessage({ command: 'chatResponse', text: `Error: ${String(e)}`})
+					panel.webview.postMessage({ command: 'chatResponse', text: `Error: ${String(e.message)}`})
 				}
 			}
 		})

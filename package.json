@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "lyubo-deepseek-test.openDeepchatPanel",
-        "title": "Open Deepchat Panel"
+        "command": "lyubo-deepseek-test.openAiChatPanel",
+        "title": "Open AI Chat Panel"
       }
     ]
   },
